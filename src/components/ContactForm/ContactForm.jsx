@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
 
-import { addContact } from "/src/redux/contactsSlice.js";
+import { addContact } from "../../redux/contactsOps";
 
 import styles from "./ContactForm.module.css";
 
@@ -30,7 +30,7 @@ const ContactForm = () => {
       .required("Required")
       .trim(),
     number: Yup.string()
-      .matches("^\\d{3}-\\d{2}-\\d{2}$", "Number format is: xxx-xx-xx")
+      .matches("^\\d{3}-\\d{3}-\\d{4}$", "Number format is: xxx-xxx-xxxx")
       .required("Required")
       .trim(),
   });
@@ -45,13 +45,13 @@ const ContactForm = () => {
         <label>
           <span>Name</span>
           <br />
-          <Field type="text" name="name" />
+          <Field type="text" name="name" placeholder="Name and Lastname" />
           <ErrorMessage component="p" name="name" />
         </label>
         <label>
           <span>Number</span>
           <br />
-          <Field type="tel" name="number" placeholder="xxx-xx-xx" />
+          <Field type="tel" name="number" placeholder="xxx-xxx-xxxx" />
           <ErrorMessage component="p" name="number" />
         </label>
         <button type="submit">Add contact</button>
